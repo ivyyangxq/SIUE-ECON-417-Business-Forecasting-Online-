@@ -1,0 +1,9 @@
+numpy
+pandas
+matplotlib
+scikit-learn
+statsmodels
+yfinance
+ipykernel
+jupyter
+Pillow

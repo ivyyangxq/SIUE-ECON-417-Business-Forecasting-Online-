@@ -1,0 +1,6 @@
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+Coding_Notes/outputs/
+Coding_Notes/lecture1_figures/
+Coding_Notes/*.png

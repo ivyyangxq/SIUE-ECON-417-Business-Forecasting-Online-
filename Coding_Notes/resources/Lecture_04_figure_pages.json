@@ -1,0 +1,200 @@
+[
+  {
+    "slide": 2,
+    "code_figure": {
+      "id": "ex01_curvature"
+    }
+  },
+  {
+    "slide": 3,
+    "code_figure": {
+      "id": "ex01_curvature"
+    }
+  },
+  {
+    "slide": 4,
+    "code_figure": {
+      "id": "ex02_polynomial_columns"
+    }
+  },
+  {
+    "slide": 5,
+    "code_figure": {
+      "id": "ex03_indicator"
+    }
+  },
+  {
+    "slide": 6,
+    "code_figure": {
+      "id": "ex04_interaction"
+    }
+  },
+  {
+    "slide": 7,
+    "code_figure": {
+      "id": "ex05_tree_parts"
+    }
+  },
+  {
+    "slide": 8,
+    "code_figure": {
+      "id": "ex06_tree_depth"
+    }
+  },
+  {
+    "slide": 9,
+    "code_figure": {
+      "id": "ex07_leaf_predictions"
+    }
+  },
+  {
+    "slide": 10,
+    "code_figure": {
+      "id": "ex08_split_gain"
+    }
+  },
+  {
+    "slide": 11,
+    "code_figure": {
+      "id": "ex09_split_search"
+    }
+  },
+  {
+    "slide": 12,
+    "code_figure": {
+      "id": "ex10_rectangles"
+    }
+  },
+  {
+    "slide": 13,
+    "code_figure": {
+      "id": "ex10_rectangles"
+    }
+  },
+  {
+    "slide": 14,
+    "code_figure": {
+      "id": "ex26_classroom_data"
+    }
+  },
+  {
+    "slide": 15,
+    "code_figure": {
+      "id": "ex11_complexity_validation"
+    }
+  },
+  {
+    "slide": 16,
+    "code_figure": {
+      "id": "ex29_joint_grid"
+    }
+  },
+  {
+    "slide": 17,
+    "code_figure": {
+      "id": "ex12_fixed_case_sensitivity"
+    }
+  },
+  {
+    "slide": 18,
+    "code_figure": {
+      "id": "ex27_forest_s16"
+    }
+  },
+  {
+    "slide": 19,
+    "code_figure": {
+      "id": "ex13_bootstrap"
+    }
+  },
+  {
+    "slide": 20,
+    "code_figure": {
+      "id": "ex14_feature_draws"
+    }
+  },
+  {
+    "slide": 21,
+    "code_figure": {
+      "id": "ex15_forest_average"
+    }
+  },
+  {
+    "slide": 22,
+    "code_figure": {
+      "id": "ex16_offset_errors"
+    }
+  },
+  {
+    "slide": 23,
+    "code_figure": {
+      "id": "ex17_shared_errors"
+    }
+  },
+  {
+    "slide": 24,
+    "code_figure": {
+      "id": "ex18_time_blocks"
+    }
+  },
+  {
+    "slide": 25,
+    "code_figure": {
+      "id": "ex31_normalization"
+    }
+  },
+  {
+    "slide": 26,
+    "code_figure": {
+      "id": "ex28_importance_methods"
+    }
+  },
+  {
+    "slide": 27,
+    "code_figure": {
+      "id": "ex19_split_importance"
+    }
+  },
+  {
+    "slide": 28,
+    "code_figure": {
+      "id": "ex20_permutation"
+    }
+  },
+  {
+    "slide": 29,
+    "code_figure": {
+      "id": "ex21_substitute_inputs"
+    }
+  },
+  {
+    "slide": 30,
+    "code_figure": {
+      "id": "ex22_pipeline"
+    }
+  },
+  {
+    "slide": 31,
+    "code_figure": {
+      "id": "ex30_rescaling"
+    }
+  },
+  {
+    "slide": 32,
+    "code_figure": {
+      "id": "ex23_model_comparison"
+    }
+  },
+  {
+    "slide": 33,
+    "code_figure": {
+      "id": "ex24_fixed_case_refits"
+    }
+  },
+  {
+    "slide": 34,
+    "code_figure": {
+      "id": "ex25_extrapolation"
+    }
+  }
+]

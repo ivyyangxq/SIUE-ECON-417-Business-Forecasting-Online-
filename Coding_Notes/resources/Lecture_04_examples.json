@@ -1,0 +1,618 @@
+[
+  {
+    "id": "4.1",
+    "title": "Constant and changing increments",
+    "topics": [
+      2,
+      3,
+      4
+    ],
+    "note_section": "2.1--2.2",
+    "figures": [
+      "ex01_curvature",
+      "ex02_polynomial_columns"
+    ],
+    "concept": "A nonlinear response can change its increment as the input changes.",
+    "steps": [
+      "Use inputs 2,3,4 for the quadratic rule and the separate one-unit linear pairs [2,3] and [7,8]. Keep the rules 10+2x and 10+2x+x squared distinct; they are constructed prediction rules, not causal estimates.",
+      "Calculate the squared column: 4, 9 and 16. Add the starting level and both contributions to obtain quadratic predictions 18, 25 and 34.",
+      "Subtract adjacent predictions. The quadratic increments are 7 and 9 for equal input steps; the linear increments remain 2.",
+      "Read the left graph as the two response shapes and the right graph as the three hand calculations. The transformed-column diagram shows that both x and its square enter the weighted sum."
+    ],
+    "slide_steps": [
+      "Set x to 2, 3, 4; calculate the squared column.",
+      "Compute predictions 18, 25, 34 and increments 7, 9.",
+      "Compare with the constant linear increment of 2."
+    ],
+    "practice": "Calculate both rules at x=5 and x=6; report their increments."
+  },
+  {
+    "id": "4.2",
+    "title": "Turn a known condition into an indicator",
+    "topics": [
+      5
+    ],
+    "note_section": "2.3",
+    "figures": [
+      "ex03_indicator"
+    ],
+    "concept": "An indicator is one when its stated condition holds and zero otherwise.",
+    "steps": [
+      "Take a promotion schedule known at the forecast origin. The condition is whether promotion will be active; do not define it from the future sales outcome.",
+      "Set D=0 for inactive and D=1 for active. The two values encode the two permitted settings.",
+      "Check the displayed route: known schedule to indicator to a prediction input. The diagram is generated in code from those labels.",
+      "Keep a threshold, an indicator and a regime distinct: the cutoff defines a condition, the indicator encodes its truth, and the regime names the setting."
+    ],
+    "slide_steps": [
+      "Read the promotion schedule available at the origin.",
+      "Encode inactive as 0 and active as 1.",
+      "Use that value without looking at the future outcome."
+    ],
+    "practice": "Encode the schedule [inactive, active, active, inactive] as an array."
+  },
+  {
+    "id": "4.3",
+    "title": "Calculate a promotion interaction",
+    "topics": [
+      6
+    ],
+    "note_section": "2.4",
+    "figures": [
+      "ex04_interaction"
+    ],
+    "concept": "An interaction lets the response to x depend on another input.",
+    "steps": [
+      "Use the same constructed rule everywhere: predicted y = 10 + 2x + 5D + 3xD. The input x and promotion D must already be known.",
+      "Set x=2 and D=0. Both promotion terms vanish, leaving 10+4=14.",
+      "Set x=2 and D=1. Add the contributions 10, 4, 5 and 6 to obtain 25. Over the full x grid, the two rules are 10+2x and 15+5x.",
+      "Compare starting levels and slopes in the plotted lines. Switching D changes both in this example; it is not evidence of a causal promotion effect."
+    ],
+    "slide_steps": [
+      "At x=2, set D=0: prediction 14.",
+      "At x=2, set D=1: prediction 25.",
+      "Compare starting levels 10/15 and slopes 2/5."
+    ],
+    "practice": "At x=4, calculate D=0 and D=1; explain each contribution."
+  },
+  {
+    "id": "4.4",
+    "title": "Read roots, branches, leaves and depth",
+    "topics": [
+      7,
+      8
+    ],
+    "note_section": "3.1",
+    "figures": [
+      "ex05_tree_parts",
+      "ex06_tree_depth"
+    ],
+    "concept": "A regression tree routes a known input through questions to a stored numerical mean.",
+    "steps": [
+      "Fit the eight traffic/sales pairs used in Example 4.5. The root contains eight observations and asks whether yesterday's traffic is at most 50.",
+      "Follow Yes or No to the two leaves. A split is the question; branches are its answers; leaves are the terminal prediction groups.",
+      "Fit a second tree with maximum depth two on the same pairs. Count splits along a case's path: root depth zero, first answer depth one, second answer depth two.",
+      "Read the plotted fitted structure rather than counting leaves as depth. In the depth-two tree, the four stored means are 22, 30, 62 and 70."
+    ],
+    "slide_steps": [
+      "Start at the root: eight days, traffic cutoff 50.",
+      "Follow a branch to a leaf mean of 26 or 66.",
+      "Count split questions along the path to measure depth."
+    ],
+    "practice": "Route traffic 20 through the depth-two tree and report its leaf prediction."
+  },
+  {
+    "id": "4.5",
+    "title": "Compute leaf means and route new cases",
+    "topics": [
+      9
+    ],
+    "note_section": "3.2",
+    "figures": [
+      "ex07_leaf_predictions"
+    ],
+    "concept": "A squared-error regression leaf predicts its training outcome mean.",
+    "steps": [
+      "Pair traffic [10,20,30,40,60,70,80,90] with sales [20,24,28,32,60,64,68,72]. The input precedes the sales target.",
+      "Split traffic at 50. Average the four left outcomes to get 26 and the four right outcomes to get 66.",
+      "Route the new input 35 to the left and 75 to the right. The computed predictions are 26 and 66; the unknown new outcomes are never used in routing.",
+      "Read the fitted graph as two constant regions, not a sloping interpolation within each leaf."
+    ],
+    "slide_steps": [
+      "Split the same eight training pairs at traffic 50.",
+      "Average left sales to 26 and right sales to 66.",
+      "Route inputs 35/75 to predictions 26/66."
+    ],
+    "practice": "Predict for traffic 50 and 51; explain the boundary convention."
+  },
+  {
+    "id": "4.6",
+    "title": "Choose a split by its immediate training gain",
+    "topics": [
+      10,
+      11
+    ],
+    "note_section": "3.3",
+    "figures": [
+      "ex08_split_gain",
+      "ex09_split_search"
+    ],
+    "concept": "Greedy fitting chooses the best current training step, not an entire future tree.",
+    "steps": [
+      "Keep the eight pairs fixed. Without splitting, the mean sales value is 46; squared distances from that mean sum to 3360.",
+      "At cutoff 50, the two within-leaf squared-error sums are 80 and 80, giving total 160.",
+      "Subtract 160 from 3360: the immediate training reduction is 3200. The candidate-cutoff table is computed for all seven separating cutoffs.",
+      "Find the minimum of the plotted candidate scores. This explains the fitted cutoff 50 but does not measure validation improvement."
+    ],
+    "slide_steps": [
+      "One group: mean 46; training squared error 3360.",
+      "Cut at 50: two squared-error sums of 80.",
+      "Choose total 160, a training reduction of 3200."
+    ],
+    "practice": "Calculate the training squared-error sum at cutoff 35 and compare it with 160."
+  },
+  {
+    "id": "4.7",
+    "title": "Connect rectangles to a conditional tree",
+    "topics": [
+      12,
+      13
+    ],
+    "note_section": "3.4",
+    "figures": [
+      "ex10_rectangles"
+    ],
+    "concept": "One-input splits divide two-input space into rectangular prediction regions.",
+    "steps": [
+      "Construct twelve cases from traffic [10,20,40,60,80,90] crossed with promotion D=0 or 1. This is a different labeled toy dataset from Example 4.3.",
+      "Assign sales 20 when traffic is at most 50. Above 50, assign 30 without promotion and 50 with promotion.",
+      "Fit the depth-two tree. It first separates traffic and then asks about promotion only inside the high-traffic branch.",
+      "Predict [35,0], [35,1], [75,0] and [75,1]. The outputs 20,20,30,50 connect the rectangular colors to the tree's conditional routes."
+    ],
+    "slide_steps": [
+      "Build 12 traffic/promotion pairs with outcomes 20/30/50.",
+      "Split on traffic, then promotion within high traffic.",
+      "Check the four predictions: 20, 20, 30, 50."
+    ],
+    "practice": "Why does changing D at traffic 35 leave the prediction unchanged? Verify in code."
+  },
+  {
+    "id": "4.8",
+    "title": "Prepare the classroom demand example",
+    "topics": [
+      -14,
+      31
+    ],
+    "note_section": "4.1.1",
+    "figures": [
+      "ex26_classroom_data"
+    ],
+    "concept": "Simulation creates artificial observations from stated rules; these are not market data.",
+    "steps": [
+      "Load the local business_demand.csv copied from the existing classroom package. It contains 180 simulated daily observations, source seed 417.",
+      "Create demand one day and two days earlier. Removing the first two unavailable lags leaves 178 usable rows.",
+      "Preserve date order. Use the first 124 rows for training, the next 27 for validation and the last 27 for final testing.",
+      "Read the date-series graph and the shaded periods. Both predictors are observed before the current demand target; no download fallback changes the data source."
+    ],
+    "slide_steps": [
+      "Load the 180-day local classroom simulation.",
+      "Create two earlier-demand inputs; keep 178 usable rows.",
+      "Split by date into 124 / 27 / 27 cases."
+    ],
+    "practice": "Print the first and last date of each block and verify their order."
+  },
+  {
+    "id": "4.9",
+    "title": "Vary one tree control at a time",
+    "topics": [
+      14
+    ],
+    "note_section": "4.1--4.1.1",
+    "figures": [
+      "ex11_complexity_validation"
+    ],
+    "concept": "Depth, leaf size and pruning constrain different aspects of a tree.",
+    "steps": [
+      "In the left panel, vary maximum depth from one to eight with minimum leaf size held at two. Compute training and validation RMSE on fixed dates.",
+      "In the middle panel, vary minimum leaf size across 1,2,4,8,16 while maximum depth is eight.",
+      "In the right panel, vary pruning strength across 0,5,20,80,200, with minimum leaf size two. Count the remaining leaves.",
+      "These conditional comparisons explain the controls. They do not replace the joint depth/leaf-size search in Example 4.10."
+    ],
+    "slide_steps": [
+      "Depth panel: hold minimum leaf size at 2.",
+      "Leaf-size panel: hold maximum depth at 8.",
+      "Pruning panel: count leaves as pruning strength increases."
+    ],
+    "practice": "Fit depth=8 with minimum leaf sizes 1 and 16; compare leaf counts and validation errors."
+  },
+  {
+    "id": "4.10",
+    "title": "Select depth and leaf size together",
+    "topics": [
+      -15
+    ],
+    "note_section": "4.1.1",
+    "figures": [
+      "ex29_joint_grid"
+    ],
+    "concept": "A grid tries a list of candidate settings; here every depth/leaf-size pair is compared.",
+    "steps": [
+      "Cross eight maximum depths with five minimum leaf sizes, producing forty candidate pairs.",
+      "Fit each candidate using the same 124 training rows and evaluate it on the same 27 validation rows.",
+      "Select the pair with the smallest validation RMSE. This run chooses depth five and leaf size four, with validation RMSE about 20.63.",
+      "Read the marked heatmap cell, then carry that pair to refitting. The final test is not used to select it."
+    ],
+    "slide_steps": [
+      "Try 8 depths \u00d7 5 leaf sizes = 40 pairs.",
+      "Use the same training and validation rows for every pair.",
+      "Select depth 5, leaf size 4; validation RMSE 20.63."
+    ],
+    "practice": "Restrict the grid to depths 2,3,5 and leaf sizes 4,8; select using validation only."
+  },
+  {
+    "id": "4.11",
+    "title": "Change one leaf while fixing the query",
+    "topics": [
+      15
+    ],
+    "note_section": "4.2",
+    "figures": [
+      "ex12_fixed_case_sensitivity"
+    ],
+    "concept": "A model-sensitivity comparison keeps the prediction case fixed.",
+    "steps": [
+      "Keep the right-leaf outcomes 60,64,68,72 and the traffic threshold 50. Their mean is 66.",
+      "Replace only the first outcome, 60, with 100. The right-leaf mean becomes 76.",
+      "Query the same input 75 before and after the replacement. The prediction rises by ten without changing the case.",
+      "This holds the split fixed to isolate the leaf average. It is not a claim that a newly optimized full tree must retain the same split."
+    ],
+    "slide_steps": [
+      "Hold the split and input 75 fixed.",
+      "Replace outcome 60 with 100 in the same leaf.",
+      "Compare the means: 66 \u2192 76."
+    ],
+    "practice": "Replace 60 with 80 instead; predict the new mean before running the calculation."
+  },
+  {
+    "id": "4.12",
+    "title": "Expand one model into a forest",
+    "topics": [
+      16
+    ],
+    "note_section": "5.1",
+    "figures": [
+      "ex27_forest_s16"
+    ],
+    "concept": "An ensemble combines fitted models; a random forest averages varied fitted trees.",
+    "steps": [
+      "Identify one decision-tree diagram as one base learner, using the node and leaf meanings established in Example 4.4.",
+      "Expand it into a collection of seven schematic trees. Different structures represent possible fitted rules; seven is a drawing choice, not a required forest size.",
+      "Send the same known input case through all member rules rather than comparing different cases.",
+      "Combine the numerical predictions by their mean. The next examples show how rows and candidate inputs vary and how the average is computed."
+    ],
+    "slide_steps": [
+      "One diagram represents one fitted tree.",
+      "Expand to a collection and route the same case through each.",
+      "Average numerical predictions from the member trees."
+    ],
+    "practice": "Explain why showing seven trees does not define a required model hyperparameter."
+  },
+  {
+    "id": "4.13",
+    "title": "Draw training rows with replacement",
+    "topics": [
+      17
+    ],
+    "note_section": "5.2",
+    "figures": [
+      "ex13_bootstrap"
+    ],
+    "concept": "With replacement means a selected row remains eligible to be drawn again.",
+    "steps": [
+      "Start both draws from the same training pool A,B,C,D. The second tree does not draw from the first tree's bag.",
+      "The first constructed draw is A,A,C,D: A repeats and B is absent.",
+      "The second draw is A,B,B,D: B repeats and C is absent. Each bag still contains four selected rows.",
+      "The branching arrows show parallel resampling from the original pool. Every row must belong to the permitted training history."
+    ],
+    "slide_steps": [
+      "Start each tree from the original pool A,B,C,D.",
+      "Draw A,A,C,D for one and A,B,B,D for another.",
+      "Identify repeated and missing rows in each bag."
+    ],
+    "practice": "Use numpy to draw four identifiers with replacement; count repeats."
+  },
+  {
+    "id": "4.14",
+    "title": "Inspect candidate feature draws",
+    "topics": [
+      18
+    ],
+    "note_section": "5.2",
+    "figures": [
+      "ex14_feature_draws"
+    ],
+    "concept": "Feature subsampling restricts the input columns that may compete at a split.",
+    "steps": [
+      "Use four illustrative input names: Traffic, Advertising, Weather and Promotion.",
+      "With seed 417, draw two distinct candidate columns at each of three illustrative nodes. The generated pairs are Promotion/Traffic, Advertising/Promotion and Promotion/Advertising.",
+      "The third pair repeats the second set in a different order. Random draws may repeat a subset; different draws need not produce different sets.",
+      "A fixed seed reproduces these choices. It does not test sensitivity to a different training sample."
+    ],
+    "slide_steps": [
+      "Start with four named input columns.",
+      "Draw two candidates per node with seed 417.",
+      "A subset may repeat; a seed makes the draws reproducible."
+    ],
+    "practice": "Change the seed to 418 and print the three new candidate sets."
+  },
+  {
+    "id": "4.15",
+    "title": "Fit three trees and average one shared query",
+    "topics": [
+      19
+    ],
+    "note_section": "5.3",
+    "figures": [
+      "ex15_forest_average"
+    ],
+    "concept": "A regression forest averages numerical member predictions for the same case.",
+    "steps": [
+      "Use a six-row constructed pool: identifiers L,A,B,C,D,E; inputs [-1,1,1,1,1,1]; outcomes [10,40,50,60,70,80].",
+      "Fit three depth-one trees to bags [L,A,A,B,C,C], [L,A,B,C,D,E] and [L,C,C,D,E,E]. Each learned root splits x at zero.",
+      "Query x=1. The right-leaf outcome means are 50,60,70. These are predictions of the actual fitted trees, not numbers attached to unrelated tree pictures.",
+      "Add 50+60+70 and divide by three to get 60. The left query x=-1 would return 10 from every tree."
+    ],
+    "slide_steps": [
+      "Fit three stated bootstrap bags from the same six-row pool.",
+      "At x=1, read the fitted leaf means 50, 60, 70.",
+      "Average the three predictions to obtain 60."
+    ],
+    "practice": "Query x=-1 for all three trees and calculate their average."
+  },
+  {
+    "id": "4.16",
+    "title": "Compare offsetting and shared errors",
+    "topics": [
+      20,
+      21
+    ],
+    "note_section": "5.4",
+    "figures": [
+      "ex16_offset_errors",
+      "ex17_shared_errors"
+    ],
+    "concept": "Averaging can offset differing errors but cannot remove an identical shared error.",
+    "steps": [
+      "Hold the target case fixed. Construct three errors +6,-3,-3, expressed as prediction minus target.",
+      "Calculate their mean: zero. The plotted average marker falls on the zero-error reference.",
+      "Now change the error vector to +6,+6,+6. Its mean remains +6; the average marker stays on the same side as every member.",
+      "These are controlled illustrations of cancellation and shared error, not a proof that a forest achieves a given accuracy."
+    ],
+    "slide_steps": [
+      "Use one fixed target and errors +6, -3, -3.",
+      "Their mean is 0: the misses offset.",
+      "Repeat with +6,+6,+6; the mean remains +6."
+    ],
+    "practice": "Calculate the average error for [6,-3,0] and for [4,4,4]."
+  },
+  {
+    "id": "4.17",
+    "title": "Keep the forest inside chronological training",
+    "topics": [
+      22
+    ],
+    "note_section": "5.5",
+    "figures": [
+      "ex18_time_blocks"
+    ],
+    "concept": "Random tree construction does not authorize future rows in the training history.",
+    "steps": [
+      "Reuse the chronological blocks from Example 4.8: 124 training, 27 validation and 27 test rows.",
+      "Permit internal bootstrap draws only from the current training block. Feature-subset settings concern columns, not permission to move future dates into training.",
+      "Use validation to choose development settings and retain the final test for the settled procedure.",
+      "Distinguish the learner's row resampling from the block-bootstrap uncertainty calculation introduced in Lecture 2."
+    ],
+    "slide_steps": [
+      "Fit and resample within the 124-row training history.",
+      "Use the next 27 rows for model development.",
+      "Keep the final 27 rows for settled procedures."
+    ],
+    "practice": "Generate training bootstrap identifiers and verify that their dates never exceed the training end."
+  },
+  {
+    "id": "4.18",
+    "title": "Normalize three split-credit totals",
+    "topics": [
+      -24
+    ],
+    "note_section": "6.1",
+    "figures": [
+      "ex31_normalization"
+    ],
+    "concept": "Normalizing divides each credit by a positive total so the shares sum to one.",
+    "steps": [
+      "Use the constructed raw credits 60,30,10 for three illustrative inputs. This hand calculation is separate from the two-input classroom forest.",
+      "Add the credits: the total is 100.",
+      "Divide each credit by 100 to obtain 0.60,0.30,0.10, and check that the shares sum to one.",
+      "Read these as shares of the chosen training split score, not percentages of future accuracy."
+    ],
+    "slide_steps": [
+      "Add constructed credits 60 + 30 + 10 = 100.",
+      "Divide each credit by 100: 0.60, 0.30, 0.10.",
+      "Interpret shares of split credits, not future accuracy."
+    ],
+    "practice": "Normalize [6,3,1] and compare its shares with [60,30,10]."
+  },
+  {
+    "id": "4.19",
+    "title": "Read the fitted forest importance",
+    "topics": [
+      23,
+      24
+    ],
+    "note_section": "6.1",
+    "figures": [
+      "ex28_importance_methods",
+      "ex19_split_importance"
+    ],
+    "concept": "Feature importance measures a fitted model's use of an input under a specified scoring procedure.",
+    "steps": [
+      "Fit the classroom forest on the 124 training rows with 100 trees, depth five, minimum leaf size eight, one candidate input per split and seed 417.",
+      "Read the fitted training split-credit shares for the two lagged-demand inputs. They are approximately 0.699 and 0.301.",
+      "Check the total of the positive normalized shares. The two-input score is not the separate three-input normalization example.",
+      "Keep training split importance distinct from permutation importance: one credits training splits; the other changes input alignment and reevaluates a fixed model.",
+      "As a separate edge case, fit a forest with minimum split size 200 to only 124 training rows. It cannot form effective splits, and both importance entries are zero. This is not a set of normalized positive credits."
+    ],
+    "slide_steps": [
+      "Read the fitted two-input classroom forest.",
+      "Its split-credit shares are approximately 0.699 and 0.301.",
+      "Keep this training score distinct from a shuffle diagnostic."
+    ],
+    "practice": "Print the fitted importance sum and explain why it is not a causal effect."
+  },
+  {
+    "id": "4.20",
+    "title": "Shuffle one validation input at a time",
+    "topics": [
+      25
+    ],
+    "note_section": "6.2",
+    "figures": [
+      "ex20_permutation"
+    ],
+    "concept": "Permutation importance reevaluates a fixed model after an input is rearranged.",
+    "steps": [
+      "Keep the trained classroom forest and all 27 validation outcomes fixed. Its unshuffled validation RMSE is about 23.33.",
+      "Rearrange one input column, leaving its values intact but changing their row alignment. The left panel displays a five-row illustration, not all evaluation rows.",
+      "Repeat twenty rearrangements per input over the full validation block. Mean RMSE is approximately 32.72 for the one-day lag shuffle and 26.27 for the two-day lag shuffle.",
+      "Compare those errors with the same unshuffled value. The increases are approximately 9.39 and 2.93 demand units; these are development diagnostics."
+    ],
+    "slide_steps": [
+      "Keep model, outcomes and 27 validation dates fixed.",
+      "Shuffle one column twenty times.",
+      "Compare RMSE 23.33 with means 32.72 and 26.27."
+    ],
+    "practice": "Repeat with five shuffles and compare the mean and spread with the twenty-shuffle calculation."
+  },
+  {
+    "id": "4.21",
+    "title": "Trace substitute information through two columns",
+    "topics": [
+      26
+    ],
+    "note_section": "6.2",
+    "figures": [
+      "ex21_substitute_inputs"
+    ],
+    "concept": "Related predictors can supply substitute information to a fitted model.",
+    "steps": [
+      "Construct twenty counter values and copy the same values into a second column. The two traces deliberately overlap.",
+      "Rearranging one column leaves the other column's values and ordering intact.",
+      "Identify exactly which information connection the perturbation breaks and which substitute remains.",
+      "The plot illustrates the information structure. It is not itself a measured claim about a trained model's permutation score; any such score must be computed and labeled separately."
+    ],
+    "slide_steps": [
+      "Create two identical constructed counter traces.",
+      "Rearrange one; the second trace remains intact.",
+      "Distinguish the diagram from a measured importance score."
+    ],
+    "practice": "Fit a model using the duplicate columns; compare shuffling one column with shuffling both."
+  },
+  {
+    "id": "4.22",
+    "title": "Preserve a pipeline and compare reporting units",
+    "topics": [
+      27,
+      -27
+    ],
+    "note_section": "7.1",
+    "figures": [
+      "ex22_pipeline",
+      "ex30_rescaling"
+    ],
+    "concept": "A pipeline applies ordered preparation and model steps; changing units can preserve tree groups.",
+    "steps": [
+      "Fit any learned preparation and the prediction rule using permitted earlier observations. Apply the stored procedure to later inputs.",
+      "Reuse the eight traffic/sales pairs. Fit once with traffic in customers, and once with traffic divided by 100, reported in hundreds of customers.",
+      "The learned cutoffs are 50 customers and approximately 0.5 hundreds. Queries 35 and 75 become 0.35 and 0.75.",
+      "Both fitted trees give predictions 26 and 66. Floating-point cutoff display can differ slightly, but the fitted group assignments and predictions agree for these cases."
+    ],
+    "slide_steps": [
+      "Fit the same eight pairs in customers and hundreds.",
+      "Compare cutoffs 50 and approximately 0.5.",
+      "Queries 35/75 and 0.35/0.75 both predict 26/66."
+    ],
+    "practice": "Rescale traffic by 10 instead and verify the same predictions."
+  },
+  {
+    "id": "4.23",
+    "title": "Report validation and refitted test results",
+    "topics": [
+      28
+    ],
+    "note_section": "7.2",
+    "figures": [
+      "ex23_model_comparison"
+    ],
+    "concept": "Model comparison uses the same target, dates and units, with settings chosen before final testing.",
+    "steps": [
+      "Compare Linear, Quadratic, Ridge, the jointly selected Tree, the preset Forest and Persistence on the same validation dates.",
+      "The validation RMSE values are approximately 20.62, 21.09, 20.62, 20.63, 23.33, 22.89. Linear, ridge and tree are very close; a forest win is not assumed.",
+      "Refit each settled learned procedure using training plus validation. Then predict the final 27 dates; persistence uses the latest observed demand directly.",
+      "Report the test scores without retuning: approximately 28.77, 29.11, 28.77, 30.90, 32.55, 29.12 in the same model order. These results concern this simulation, not a universal ranking."
+    ],
+    "slide_steps": [
+      "Compare all candidates on identical validation dates.",
+      "Refit settled procedures on training plus validation.",
+      "Report test results without selecting from the test."
+    ],
+    "practice": "Export the table and identify a comparison that is nearly tied on validation but differs on test."
+  },
+  {
+    "id": "4.24",
+    "title": "Refit while holding reference inputs fixed",
+    "topics": [
+      29
+    ],
+    "note_section": "7.2",
+    "figures": [
+      "ex24_fixed_case_refits"
+    ],
+    "concept": "Changing the training sample and changing the prediction case answer different questions.",
+    "steps": [
+      "Construct low-lag and high-lag reference input pairs from the training-data range. Keep both vectors unchanged throughout the diagnostic.",
+      "Fit the same selected tree and preset forest on six 80-day windows ending at rows 80,90,100,110,120,124 within training history.",
+      "After each fit, predict the two unchanged vectors and plot each vector in its own panel.",
+      "Variation along a panel tracks refit sensitivity for a fixed case. A difference between panels reflects different input conditions and must not be called model instability."
+    ],
+    "slide_steps": [
+      "Choose two fixed reference input vectors.",
+      "Refit six 80-day windows inside training history.",
+      "Compare predictions within each unchanged-case panel."
+    ],
+    "practice": "Print the two reference vectors and the prediction spread across refits for each model and case."
+  },
+  {
+    "id": "4.25",
+    "title": "Predict beyond the observed input range",
+    "topics": [
+      30
+    ],
+    "note_section": "7.3",
+    "figures": [
+      "ex25_extrapolation"
+    ],
+    "concept": "Extrapolation applies a rule outside represented input conditions.",
+    "steps": [
+      "Reuse the same eight traffic/sales training pairs, whose largest observed input is 90.",
+      "Fit the one-split tree and linear regression using only those pairs.",
+      "Query inputs out to 140. The tree keeps returning its right-leaf mean 66; the fitted linear rule continues its line.",
+      "Read the shaded region as outside the training input range. No target outcomes in that region were supplied to validate either continuation."
+    ],
+    "slide_steps": [
+      "Fit the same eight pairs, with largest input 90.",
+      "Extend queries to 140 without adding outcomes.",
+      "The tree stays at leaf mean 66 outside its range."
+    ],
+    "practice": "Compare both predictions at traffic 120; explain what remains unknown about their accuracy."
+  }
+]
